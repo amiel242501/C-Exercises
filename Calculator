@@ -1,0 +1,90 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+namespace Calculator
+{
+    class Operation
+    {
+
+       
+        public double Sum(double x, double y)
+        {
+            return x + y;
+        }
+
+        public double Dif(double x, double y)
+        {
+            return x - y;
+        }
+
+        public double Prod(double x, double y)
+        {
+            return x * y;
+        }
+        public double Div(double x, double y)
+        {
+            return x / y;
+        }
+
+    }
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            try
+            {
+            Console.Write("Please Enter the first number: ");
+            double  x = Convert.ToDouble(Console.ReadLine());
+            Console.Write("Please Enter the second number: ");
+            double y = Convert.ToDouble(Console.ReadLine());
+            Operation r = new Operation();
+            
+
+            Console.WriteLine("Which Arithmetic Operation would you like to execute? ");
+            Console.WriteLine("1. Addition");
+            Console.WriteLine("2. Subtraction");
+            Console.WriteLine("3. Multiplication");
+            Console.WriteLine("4. Division");
+            Console.Write("Please Enter the number only: ");
+          
+                int count = int.Parse(Console.ReadLine());
+
+                if (count == 1)
+                {
+                    Console.WriteLine("Sum is {0}", r.Sum(x,y));
+                }
+
+
+                else if (count == 2)
+                {
+                    Console.WriteLine("Difference is {0}", r.Dif(x,y));
+                }
+
+
+                else if (count == 3)
+                {
+                    Console.WriteLine("Product is {0}", r.Prod(x,y));
+                }
+
+                else if (count == 4)
+                {
+                    Console.WriteLine("Quotient is {0}", r.Div(x,y));
+                }
+                else
+                {
+                    Console.WriteLine("Please Enter 1-4 only");
+                }
+
+            }
+            catch (Exception)
+            {
+                Console.WriteLine("Numbers ONLY!");
+            }
+            Console.ReadKey();
+        }
+    }
+}
