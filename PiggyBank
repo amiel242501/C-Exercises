@@ -1,0 +1,87 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Bank
+{
+    public delegate void PiggyBankHandler(object o, PiggyBankEventArgs e);
+    public class PiggyBankEventArgs : EventArgs
+    {
+        public int deposit;
+
+
+        public PiggyBankEventArgs(int dep)
+        {
+            deposit = dep;
+
+        }
+    }
+
+    public class PiggyBankListener
+    {
+        public void ShowOnScreen(object o, PiggyBankEventArgs e)
+        {
+            Console.WriteLine("---------------------------");
+            Console.WriteLine(
+                "Your total Saving is {0}",
+                e.deposit);
+            Console.WriteLine("---------------------------");
+
+        }
+    }
+
+
+
+
+    class Program
+    {
+        public static event PiggyBankHandler PiggyBank;
+        static void Main(string[] args)
+        {
+            PiggyBankListener pig = new PiggyBankListener();
+            PiggyBank += new PiggyBankHandler(pig.ShowOnScreen);
+            GenNumbers();
+            Console.ReadKey();
+
+
+        }
+        public static void OnPiggyBank(PiggyBankEventArgs e)
+        {
+            if (PiggyBank != null)
+                PiggyBank(new object(), e);
+        }
+
+        public static void GenNumbers()
+        {
+            Console.Write("Enter Saving Goal: ");
+            int goal = Convert.ToInt32(Console.ReadLine());
+            int total = 0;
+            while (true)
+            {
+
+
+                Console.Write("Amount to be deposit: ");
+                int dep1 = Convert.ToInt32(Console.ReadLine());
+
+                total += dep1;
+
+                PiggyBankEventArgs x = new PiggyBankEventArgs(total);
+                OnPiggyBank(x);
+                if (total >= goal)
+                {
+                    Console.WriteLine("Savings goal achieved!. The program will exit");
+                    break;
+
+                }
+
+
+            }
+        }
+    }
+}
+
+
+
+
