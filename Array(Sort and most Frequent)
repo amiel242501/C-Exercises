@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ArraySort
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            int[] x = new int[10];
+            int counter = 0;                                 
+            int longestOccurance = 0;
+            int mostFrequentNumber = 0;
+            Console.WriteLine("Enter 10 numbers");
+            for (int count = 0; count < x.Length; count++)
+            {
+
+                string d = Console.ReadLine();
+                x[count] = int.Parse(d);
+
+                counter = 0;
+                for (int j = 0; j < x.Length; j++)
+                {
+                    if (x[j] == x[count])
+                    {
+                        counter++;
+                    }
+                }
+
+                if (counter > longestOccurance)
+                {
+                    longestOccurance = counter;
+                    mostFrequentNumber = x[count];
+                }
+             
+            }
+            Console.WriteLine("Sorted");
+            Array.Sort(x);
+            foreach (int y in x)
+                Console.WriteLine(y+ " ");
+            Console.WriteLine("Most Frequent");
+            Console.WriteLine(mostFrequentNumber);
+            Console.Read();
+        }
+    }
+}
