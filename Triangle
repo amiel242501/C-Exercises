@@ -1,0 +1,55 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Exercises1
+{
+    class Program
+    {
+
+        static void Main(string[] args)
+        {
+      
+            Console.Write("Input a number: ");
+
+            try
+            {
+
+                int input = int.Parse(Console.ReadLine());
+
+                if (input >= 3)
+                {
+                    for (int height = 0; height < input; height++)
+                    {
+
+                        for (int PrintSpace = input - height; PrintSpace > 0; PrintSpace--)
+                            Console.Write(" ");
+
+                        for (int PrintAsterisk = 0; PrintAsterisk <= 2 * height; PrintAsterisk++)
+                            Console.Write("*");
+
+                        Console.WriteLine();
+
+                    }
+                    Console.Read();
+
+                }
+
+                else {
+                    Console.WriteLine("Minimum level of triange is 3");
+                    Console.Read();
+                }
+             
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.ReadKey();
+            }
+        }
+    }
+
+}
