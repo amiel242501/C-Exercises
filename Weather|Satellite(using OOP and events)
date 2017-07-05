@@ -1,0 +1,100 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+
+public delegate void Satellite(object o, WeatherEventArgs e);
+
+public class WeatherEventArgs : EventArgs
+{
+    public  double Temperature;
+    public  double windSpeed;
+
+    public WeatherEventArgs(double temp, double wind)
+    {
+        Temperature = temp;
+        windSpeed = wind;
+    }
+}
+public class WeatherListener
+{
+    public void ShowOnScreen(object o, WeatherEventArgs e)
+    {
+        Console.WriteLine();
+        Console.WriteLine("-----Latest Satellite Report------");
+        Console.WriteLine(
+            "The current Temperature is {0}",
+            e.Temperature);
+        Console.WriteLine(
+          "The current Wind speed is {0}",
+          e.windSpeed);
+        Console.WriteLine("----------------------------------");
+    }
+}
+
+public class myClass
+{
+    public static event Satellite Weather;
+
+    public static void Main()
+    {
+        Console.WriteLine("---LATEST WEATHER FORECAST---");
+        Console.WriteLine("-Enter valid input-");
+        WeatherListener dbsl = new WeatherListener();
+        Weather += new Satellite(dbsl.ShowOnScreen);
+        WeatherChange();
+        Console.ReadKey();
+     
+     
+
+    }
+
+    public static void OnEventWeather(WeatherEventArgs e)
+    {
+        if (Weather != null)
+            Weather(new object(), e);
+    }
+
+
+    public static void WeatherChange()
+    {
+        try
+        {
+            while (true)
+            {
+
+
+                Console.Write("Enter Current Temperature: ");
+                double temp1 = Convert.ToDouble(Console.ReadLine());
+
+                Console.Write("Enter Current Wind Speed: ");
+                double wind1 = Convert.ToDouble(Console.ReadLine());
+
+                if (temp1 == 0 || wind1 == 0)
+                {
+                    break;
+                }
+
+
+                WeatherEventArgs e1 = new WeatherEventArgs(temp1, wind1);
+                OnEventWeather(e1);
+                Console.WriteLine();
+                Console.WriteLine();
+                Console.WriteLine("--Enter latest changes in weather--");
+                Console.WriteLine("--or enter 0 on any field if you wish to exit the program--\n\n");
+            
+             
+
+            }
+        }
+        catch (Exception)
+        {
+            Console.WriteLine("Invalid input. The program will exit");
+        }
+
+
+    }
+}
+
